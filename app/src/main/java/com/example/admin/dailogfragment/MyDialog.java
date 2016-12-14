@@ -24,13 +24,20 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.my_dialog, null);
+        //getDialog().setTitle("Στοιχεία επιβάτη");
+        //getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
+
+        View view = inflater.inflate(R.layout.dialog_fragment_1, null);
+/*
         yes = (Button)view.findViewById(R.id.button3);
         no = (Button)view.findViewById(R.id.button2);
 
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
         setCancelable(false);
+        */
+
         return view;
     }
 

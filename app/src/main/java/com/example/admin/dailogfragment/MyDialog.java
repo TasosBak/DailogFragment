@@ -27,6 +27,7 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.my_dialog, null);
         yes = (Button)view.findViewById(R.id.button3);
         no = (Button)view.findViewById(R.id.button2);
+
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
         setCancelable(false);

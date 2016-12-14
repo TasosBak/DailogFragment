@@ -1,13 +1,14 @@
 package com.example.admin.dailogfragment;
 
+import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -16,11 +17,15 @@ import android.widget.Toast;
 
 public class MyDialog extends DialogFragment implements View.OnClickListener{
 
-    Button yes, no;
+    Button yes, no, ok;
+    Activity activity;
+    TextView test;
 
+    OnOkButtonClickedListener myListener;
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = activity;
     }
 
     @Override
@@ -30,6 +35,11 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
 
 
         View view = inflater.inflate(R.layout.dialog_fragment_1, null);
+        ok = (Button)view.findViewById(R.id.done_button);
+        ok.setOnClickListener(this);
+
+        test = (TextView)view.findViewById(R.id.adults_number_pick);
+
 /*
         yes = (Button)view.findViewById(R.id.button3);
         no = (Button)view.findViewById(R.id.button2);
@@ -49,12 +59,30 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
             Toast.makeText(getActivity(), "yes was clicked", Toast.LENGTH_LONG).show();
         }
 
+        else if(view.getId() == R.id.done_button) {
+            dismiss();
+
+            try{
+                Toast.makeText(getActivity(), "all good  " + test.getText().toString(), Toast.LENGTH_LONG).show();
+                ((OnOkButtonClickedListener) activity).onOkButtonClicked(test.getText().toString());
+            }catch (ClassCastException cce){
+                Toast.makeText(getActivity(), "must implement shit brah", Toast.LENGTH_LONG).show();
+            }
+
+        }
+
         else {
             dismiss();
             Toast.makeText(getActivity(), "no was clicked", Toast.LENGTH_LONG).show();
         }
 
+
     }
 
+
+    //container activity must implement this interface
+    public interface OnOkButtonClickedListener {
+        public void onOkButtonClicked(String testStr);
+    }
 
 }
